@@ -1,5 +1,6 @@
 package com.orderRequest.domain.order.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.orderRequest.domain.order.dto.OrderDTO;
 import jakarta.persistence.*;
 import java.math.BigDecimal;

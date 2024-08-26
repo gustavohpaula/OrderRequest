@@ -1,5 +1,7 @@
 package com.orderRequest.domain.order.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.orderRequest.domain.order.dto.ItemDTO;
 import com.orderRequest.domain.order.enums.ItemTypeEnum;
 import jakarta.persistence.*;
@@ -25,6 +27,7 @@ public class ItemEntity
 	private ItemTypeEnum itemType;
 
 	@ManyToMany(mappedBy = "orderItens")
+	@JsonIgnore
 	private List<OrderEntity> orders;
 	public ItemEntity(ItemDTO item){
 		this.name = item.getName();
