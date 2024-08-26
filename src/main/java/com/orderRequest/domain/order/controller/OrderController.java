@@ -1,5 +1,6 @@
 package com.orderRequest.domain.order.controller;
 
+import com.orderRequest.domain.order.dto.OrderDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,26 +11,26 @@ public class OrderController
 {
 
 	@PostMapping("/createOrder")
-	public ResponseEntity<String> createOrder(){
+	public ResponseEntity<String> createOrder(@RequestBody OrderDTO orderDTO){
 
-		return new ResponseEntity<>("Pedido Criado", HttpStatus.CREATED);
+		return new ResponseEntity<>(orderDTO.toString(), HttpStatus.CREATED);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<String> getOrder(){
+	@GetMapping
+	public ResponseEntity<String> getOrder(@RequestParam Long id){
 
-		return new ResponseEntity<>("Pedido", HttpStatus.FOUND);
+		return new ResponseEntity<>(id.toString(), HttpStatus.FOUND);
 	}
 
-	@PutMapping("/updateOrder/{id}")
-	public ResponseEntity<String> updateOrder(){
+	@PutMapping("/updateOrder")
+	public ResponseEntity<String> updateOrder(@RequestParam Long id, @RequestBody OrderDTO orderDTO){
 
-		return new ResponseEntity<>("Pedido atualizado", HttpStatus.OK);
+		return new ResponseEntity<>(orderDTO.toString() + " " +id.toString(), HttpStatus.OK);
 	}
 
-	@DeleteMapping("/deleteOrder/{id}")
-	public ResponseEntity<String> deleteOrder(){
-		return new ResponseEntity<>("Pedido excluido", HttpStatus.OK);
+	@DeleteMapping("/deleteOrder")
+	public ResponseEntity<String> deleteOrder(@RequestParam Long id){
+		return new ResponseEntity<>(id.toString(), HttpStatus.OK);
 	}
 
 	@GetMapping("/")
