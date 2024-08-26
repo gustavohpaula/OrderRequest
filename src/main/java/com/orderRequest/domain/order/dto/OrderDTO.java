@@ -15,5 +15,6 @@ public class OrderDTO
 
 	@NonNull
 	private List<ItemEntity> orderItems;
-	private BigDecimal discount;
+	private BigDecimal discountPercentage;
+	private Boolean situation;
 }
