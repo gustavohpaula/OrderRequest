@@ -4,8 +4,10 @@ import com.orderRequest.domain.order.dto.ItemDTO;
 import com.orderRequest.domain.order.dto.OrderDTO;
 import com.orderRequest.domain.order.entities.ItemEntity;
 import com.orderRequest.domain.order.services.ItemService;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,9 +55,10 @@ public class ItemController
 		return new ResponseEntity<>(returnMessage, HttpStatus.OK);
 	}
 
-	@GetMapping("/")
-	public ResponseEntity<String> getAllItems(){
+	@GetMapping("/getAllItems")
+	public ResponseEntity<Page<ItemEntity>> getAllItems(@RequestParam int page, @RequestParam int size){
 
-		return new ResponseEntity<>("items", HttpStatus.FOUND);
+		Page<ItemEntity> items = itemService.getAllItems(page, size);
+		return new ResponseEntity<>(items, HttpStatus.FOUND);
 	}
 }
