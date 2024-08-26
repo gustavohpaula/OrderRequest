@@ -2,6 +2,10 @@ package com.orderRequest.domain.order.controller;
 
 import com.orderRequest.domain.order.dto.ItemDTO;
 import com.orderRequest.domain.order.dto.OrderDTO;
+import com.orderRequest.domain.order.entities.ItemEntity;
+import com.orderRequest.domain.order.services.ItemService;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,28 +14,43 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/item")
 public class ItemController
 {
+	@Autowired
+	private ItemService itemService;
 
 	@PostMapping("/createItem")
-	public ResponseEntity<String> createItem(@RequestBody ItemDTO itemDTO){
+	public ResponseEntity<ItemEntity> createItem(@RequestBody ItemDTO itemDTO){
 
-		return new ResponseEntity<>(itemDTO.toString(), HttpStatus.CREATED);
+		ItemEntity item = this.itemService.createItem(itemDTO);
+		return new ResponseEntity<>(item, HttpStatus.CREATED);
 	}
 
 	@GetMapping
-	public ResponseEntity<String> getItem(@RequestParam Long id){
+	public ResponseEntity<String> getItem(@RequestParam UUID id) throws Exception
+	{
 
-		return new ResponseEntity<>(id.toString(), HttpStatus.FOUND);
+		try
+		{
+			ItemEntity item = this.itemService.getItemById(id);
+			return new ResponseEntity<>(item.toString(), HttpStatus.FOUND);
+		}catch (Exception e){
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+		}
+
 	}
 
 	@PutMapping("/updateItem")
-	public ResponseEntity<String> updateItem(@RequestParam Long id, @RequestBody ItemDTO itemDTO){
-
-		return new ResponseEntity<>(itemDTO.toString() + " " +id.toString(), HttpStatus.OK);
+	public ResponseEntity<ItemEntity> updateItem(@RequestParam UUID id, @RequestBody ItemDTO itemDTO)
+		throws Exception
+	{
+		ItemEntity item = this.itemService.updateItem(id, itemDTO);
+		return new ResponseEntity<>(item, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/deleteItem")
-	public ResponseEntity<String> deleteItem(@RequestParam Long id){
-		return new ResponseEntity<>(id.toString(), HttpStatus.OK);
+	public ResponseEntity<String> deleteItem(@RequestParam UUID id) throws Exception
+	{
+		String returnMessage = this.itemService.deleteItem(id);
+		return new ResponseEntity<>(returnMessage, HttpStatus.OK);
 	}
 
 	@GetMapping("/")
