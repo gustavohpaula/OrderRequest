@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ItemRepository extends JpaRepository<ItemEntity, Long>
 {
 	Optional<ItemEntity> findItemEntitiesById(UUID id);
+
 }

@@ -27,6 +27,7 @@ public class OrderService
 	public OrderEntity createOrder(OrderDTO data)
 	{
 		OrderEntity newOrder = new OrderEntity(data);
+		newOrder.getOrderItens().removeIf(item -> !item.getActivated());
 		newOrder = this.calculateDiscount(newOrder);
 		this.saveOrder(newOrder);
 		return newOrder;
