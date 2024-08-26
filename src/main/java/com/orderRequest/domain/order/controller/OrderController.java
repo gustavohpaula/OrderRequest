@@ -1,6 +1,11 @@
 package com.orderRequest.domain.order.controller;
 
 import com.orderRequest.domain.order.dto.OrderDTO;
+import com.orderRequest.domain.order.entities.OrderEntity;
+import com.orderRequest.domain.order.services.OrderService;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,32 +15,44 @@ import org.springframework.web.bind.annotation.*;
 public class OrderController
 {
 
-	@PostMapping("/createOrder")
-	public ResponseEntity<String> createOrder(@RequestBody OrderDTO orderDTO){
+	@Autowired
+	private OrderService orderService;
 
-		return new ResponseEntity<>(orderDTO.toString(), HttpStatus.CREATED);
+	@PostMapping("/createOrder")
+	public ResponseEntity<OrderEntity> createOrder(@RequestBody OrderDTO orderDTO){
+
+		OrderEntity order = this.orderService.createOrder(orderDTO);
+		return new ResponseEntity<>(order, HttpStatus.CREATED);
 	}
 
 	@GetMapping
-	public ResponseEntity<String> getOrder(@RequestParam Long id){
+	public ResponseEntity<OrderEntity> getOrder(@RequestParam UUID id) throws Exception
+	{
 
-		return new ResponseEntity<>(id.toString(), HttpStatus.FOUND);
+		OrderEntity order = this.orderService.getOrderById(id);
+		return new ResponseEntity<>(order, HttpStatus.FOUND);
 	}
 
 	@PutMapping("/updateOrder")
-	public ResponseEntity<String> updateOrder(@RequestParam Long id, @RequestBody OrderDTO orderDTO){
+	public ResponseEntity<OrderEntity> updateOrder(@RequestParam UUID id, @RequestBody OrderDTO orderDTO)
+		throws Exception
+	{
 
-		return new ResponseEntity<>(orderDTO.toString() + " " +id.toString(), HttpStatus.OK);
+		OrderEntity order = this.orderService.updateOrder(id, orderDTO);
+		return new ResponseEntity<>(order, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/deleteOrder")
-	public ResponseEntity<String> deleteOrder(@RequestParam Long id){
-		return new ResponseEntity<>(id.toString(), HttpStatus.OK);
+	public ResponseEntity<String> deleteOrder(@RequestParam UUID id) throws Exception
+	{
+		String returnMessage = this.orderService.deleteOrder(id);
+		return new ResponseEntity<>(returnMessage, HttpStatus.OK);
 	}
 
-	@GetMapping("/")
-	public ResponseEntity<String> getAllOrders(){
+	@GetMapping("/getAllOrders")
+	public ResponseEntity<Page<OrderEntity>> getAllOrders(int page, int size){
 
-		return new ResponseEntity<>("Pedidos", HttpStatus.FOUND);
+		Page<OrderEntity> orders = this.orderService.getAllOrders(page, size);
+		return new ResponseEntity<>(orders, HttpStatus.FOUND);
 	}
 }
