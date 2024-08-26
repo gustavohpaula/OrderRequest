@@ -12,6 +12,6 @@ public class OrderDTO
 {
 
 	@NonNull
-	private List<ProductServiceDTO> orderItens;
+	private List<String> orderItensID;
 	private BigDecimal discount;
 }

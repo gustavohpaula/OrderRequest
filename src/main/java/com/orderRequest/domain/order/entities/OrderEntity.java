@@ -17,7 +17,7 @@ public class OrderEntity
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
-	@ManyToMany(mappedBy = "productService")
-	private List<ProductServiceEntity> orderItens;
+	@ManyToMany(mappedBy = "item")
+	private List<ItemEntity> orderItens;
 
 }

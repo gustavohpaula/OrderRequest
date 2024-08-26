@@ -6,14 +6,14 @@ import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.*;
 
-@Entity(name = "productService")
-@Table(name = "productService")
+@Entity(name = "item")
+@Table(name = "item")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class ProductServiceEntity
+public class ItemEntity
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
