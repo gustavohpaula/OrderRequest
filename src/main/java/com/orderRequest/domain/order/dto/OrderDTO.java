@@ -1,5 +1,7 @@
 package com.orderRequest.domain.order.dto;
 
+import com.orderRequest.domain.order.entities.ItemEntity;
+import com.orderRequest.domain.order.entities.OrderEntity;
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.*;
@@ -12,6 +14,6 @@ public class OrderDTO
 {
 
 	@NonNull
-	private List<String> orderItensID;
+	private List<ItemEntity> orderItems;
 	private BigDecimal discount;
 }
