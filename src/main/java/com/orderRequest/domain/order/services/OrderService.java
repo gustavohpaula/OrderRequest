@@ -48,6 +48,8 @@ public class OrderService
 	public OrderEntity updateOrder(UUID id, OrderDTO data) throws Exception
 	{
 		OrderEntity order = this.getOrderById(id);
+		order.getOrderItens().removeIf(item -> !item.getActivated());
+		order = this.calculateDiscount(order);
 		order.updateOrderData(data);
 		this.saveOrder(order);
 		return order;
