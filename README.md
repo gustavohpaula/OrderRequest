@@ -114,7 +114,7 @@ mvn spring-boot:run
 }
 ```
 `itemType é o tipo do item, 0 para produto e 1 para serviço`
-`activated é para saber se o item está ativo ou não`
+`activated é para saber se o item está ativo ou não. 0 para inativo e 1 para ativo`
 
 #### Resposta Esperada Ao criar, atualizar e encontrar um item
 ```
