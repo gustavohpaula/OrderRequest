@@ -41,8 +41,11 @@ um pedido com base nos itens associados, aplicando descontos quando aplicável.
 Antes de começar, você precisará ter instalado em sua máquina as seguintes ferramentas:
 
 Java 17 ou superior
+
 Maven 3.6.3 ou superior
+
 PostgreSQL 16 ou superior
+
 IDE (IntelliJ IDEA, Eclipse, VSCode, etc.)
 
 ## Instalação
