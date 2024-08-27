@@ -27,15 +27,19 @@ public class OrderEntity
 		inverseJoinColumns = @JoinColumn(name = "item_id")
 	)
 	private List<ItemEntity> orderItens;
-	private BigDecimal discount;
+	private BigDecimal discountPercentage;
+	private BigDecimal totalValue;
+	private Boolean situation;
 
 	public OrderEntity(OrderDTO data){
 		this.orderItens = data.getOrderItems();
-		this.discount = data.getDiscount();
+		this.discountPercentage = data.getDiscountPercentage();
+		this.situation = data.getSituation();
 	}
 
 	public void updateOrderData(OrderDTO data){
 		this.orderItens = data.getOrderItems();
-		this.discount = data.getDiscount();
+		this.discountPercentage = data.getDiscountPercentage();
+		this.situation = data.getSituation();
 	}
 }

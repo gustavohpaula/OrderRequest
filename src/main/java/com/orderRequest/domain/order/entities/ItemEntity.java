@@ -25,6 +25,7 @@ public class ItemEntity
 	private String name;
 	private BigDecimal itemValue;
 	private ItemTypeEnum itemType;
+	private Boolean activated;
 
 	@ManyToMany(mappedBy = "orderItens")
 	@JsonIgnore
@@ -33,12 +34,14 @@ public class ItemEntity
 		this.name = item.getName();
 		this.itemValue = item.getValue();
 		this.itemType = item.getItemType();
+		this.activated = item.getActivated();
 	}
 
 	public void updateItemData(ItemDTO data){
 		this.name = data.getName();
 		this.itemValue = data.getValue();
 		this.itemType = data.getItemType();
+		this.activated = data.getActivated();
 	}
 
 	@Override
