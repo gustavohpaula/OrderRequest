@@ -19,4 +19,7 @@ public class ItemDTO
 
 	@NonNull
 	private ItemTypeEnum itemType;
+
+	@NonNull
+	private Boolean activated;
 }
