@@ -113,6 +113,9 @@ mvn spring-boot:run
 	"activated": 1
 }
 ```
+`itemType é o tipo do item, 0 para produto e 1 para serviço`
+`activated é para saber se o item está ativo ou não`
+
 #### Resposta Esperada Ao criar, atualizar e encontrar um item
 ```
 {
@@ -156,6 +159,7 @@ mvn spring-boot:run
 }
 }
 ```
+`situation é a situação do pedido sendo 0 para fechado e 1 para aberto`
 #### Resposta Esperada Ao criar, atualizar e encontrar um pedido
 ```
 {
@@ -191,6 +195,7 @@ mvn spring-boot:run
 
 ### Ferramentas Recomendadas Para Testes da API
 **Postman**
+
 **Insomnia**
 
 ## Execução dos Testes
@@ -201,4 +206,5 @@ mvn test
 
 ### Testes Disponiveis
 **OrderServiceTest:** Teste da camada de serviço do pedido
+
 **ItemServiceTest:** Teste da camada de serviço dos items
