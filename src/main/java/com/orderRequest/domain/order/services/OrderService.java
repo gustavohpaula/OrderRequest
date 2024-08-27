@@ -28,7 +28,7 @@ public class OrderService
 	{
 		OrderEntity newOrder = new OrderEntity(data);
 		newOrder.getOrderItens().removeIf(item -> !item.getActivated());
-		newOrder = this.calculateDiscount(newOrder);
+		newOrder = this.calculateTotalValue(newOrder);
 		this.saveOrder(newOrder);
 		return newOrder;
 	}
@@ -49,7 +49,7 @@ public class OrderService
 	{
 		OrderEntity order = this.getOrderById(id);
 		order.getOrderItens().removeIf(item -> !item.getActivated());
-		order = this.calculateDiscount(order);
+		order = this.calculateTotalValue(order);
 		order.updateOrderData(data);
 		this.saveOrder(order);
 		return order;
@@ -72,7 +72,7 @@ public class OrderService
 		this.repository.delete(order);
 	}
 
-	public OrderEntity calculateDiscount(OrderEntity order)
+	public OrderEntity calculateTotalValue(OrderEntity order)
 	{
 		BigDecimal totalValue = BigDecimal.ZERO;
 
