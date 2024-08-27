@@ -9,20 +9,31 @@ um pedido com base nos itens associados, aplicando descontos quando aplicável.
 ## Funcionalidades
 
 **Criar Item**
+
 **Atualizar Item**
+
 **Encontrar Item**
+
 **Deletar Item**
+
 **Criar Pedido**
+
 **Atualizar Pedido**
+
 **Encontrar Pedido**
+
 **Deletar Pedido**
 
 ## Tecnologias Utilizadas
 
 **Java 17**
+
 **Spring Boot 3.3**
+
 **Spring Data JPA**
+
 **PostgresSql 16**
+
 **Maven**
 
 ## Pré-requisitos
